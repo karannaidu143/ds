@@ -1,0 +1,72 @@
+#include<stdio.h> 
+#include<stdlib.h> 
+#define MAX 4 
+#define TS 5 
+struct process 
+{ 
+ char pname[20]; 
+ int bt; 
+ int wt; 
+}pq[MAX]; 
+int f,r; 
+void readprocess() 
+{ 
+ printf("\nEnter the process name nd execution time:\n"); 
+ for(r=0;r<MAX;r++) 
+ { 
+ 
+  scanf("%s%d",pq[r].pname,&pq[r].bt); 
+  pq[r].wt=0; 
+ } 
+} 
+void calculatewt() 
+{ 
+ int i,j,ctr=0; 
+          f=0; 
+ while(1) 
+ { 
+  if(pq[f].bt>0) 
+  { 
+   pq[f].bt=pq[f].bt-TS; 
+   j=f; 
+   for(i=0;i<MAX;i++) 
+   { 
+    j=(j+1)%MAX; 
+    if(j == f) 
+     break; 
+    if(pq[j].bt>0) 
+    { 
+     pq[j].wt+=TS; 
+    } 
+  } 
+  } 
+  f=(f+1)%MAX; 
+  ctr=0; 
+  for(i=0;i<MAX;i++) 
+  { 
+   if(pq[i].bt<=0) 
+    ctr++; 
+  } 
+  if(ctr==MAX) 
+   break; 
+ } 
+ 
+ 
+} 
+void printwt() 
+{ 
+ float twt=0;int i; 
+ for(i=0;i<MAX;i++) 
+ { 
+  printf("\n%s\t%d",pq[i].pname,pq[i].wt); 
+  twt+=pq[i].wt; 
+ } 
+ printf("\nAvgerage waiting time : %f",(twt/MAX)); 
+} 
+ 
+void main() 
+{ 
+ readprocess(); 
+ calculatewt(); 
+ printwt(); 
+ }

@@ -1,0 +1,41 @@
+#include<stdio.h> 
+ 
+void evaluate_postfix(char a[20]) 
+ { 
+  int i=0,top=0,n1,n2,r,s[20]; 
+  for(i=0;a[i]!='\0';i++) 
+  { 
+   if((a[i]>=48)&&(a[i]<=57)) 
+   { 
+   s[top]=a[i]-48; 
+   top++; 
+   } 
+   else 
+   { 
+    n2=s[--top]; 
+    n1=s[--top]; 
+ 
+   switch(a[i]) 
+   { 
+    case '+': r=n1+n2;break; 
+    case '-': r=n1-n2;break; 
+    case '*': r=n1*n2;break; 
+    case '/': r=n1/n2;break; 
+    case '^': r=n1^n2;break; 
+   } 
+   s[top]=r; 
+   top++; 
+} 
+ } 
+ 
+ printf("RESULT IS %d",s[0]); 
+ 
+} 
+ 
+void main() 
+{ 
+ char a[20]; 
+ printf("Enter the postfix expresion:"); 
+ gets(a); 
+ evaluate_postfix(a); 
+} 
