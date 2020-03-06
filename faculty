@@ -1,0 +1,22 @@
+create database student_faculty;
+use student_faculty;
+create table student( snum int NOT NULL,sname varchar(10),major varchar(10),lvl varchar(10), age int ,primary key (snum) );
+create table faculty ( fid int ,fname varchar(10),deptid INT, primary key (fid));
+ create table class (cname varchar(10),
+ metts_at  timestamp,
+ room varchar(10),
+ fid int,
+ primary key(cname),
+ foreign key(fid)  references faculty(fid) on delete cascade);
+ create table enrolled(snum int , cname varchar(10), primary key (snum,cname),foreign key(snum) references student(snum) on delete cascade,foreign key(cname) references class(cname));  
+ insert into  student(snum,sname,major,lvl,age) values (10,'abc','cse','1st level',19);
+ insert into  student(snum,sname,major,lvl,age) values (11,'karan','cse','100th ',19);
+ insert into  student(snum,sname,major,lvl,age) values (12,'naidu','cse','3rd level',19);
+ insert into  student(snum,sname,major,lvl,age) values (13,'tom','ec','5th level',18);
+ insert into  student(snum,sname,major,lvl,age) values (14,'jerry','cse','9st level',19);
+ select * from student;
+insert into faculty(fid,fname,deptid) values (12,'mv',1000);
+insert into faculty(fid,fname,deptid) values (13,'mira',1001);
+insert into faculty(fid,fname,deptid) values (14,'shiva',1002);
+insert into faculty(fid,fname,deptid) values (15,'nupur',1000);
+select * from faculty;
